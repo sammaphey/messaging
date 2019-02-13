@@ -19,7 +19,8 @@ export class GistEditComponent {
       description: '',
       technologies: [],
       link: '',
-      techs: ''
+      techs: '',
+      user: ''
   };
 
   constructor(private gistService: GistService,
@@ -36,7 +37,8 @@ export class GistEditComponent {
       this.gist.technologies = this.gist.techs.split(',');
       // Update in case of an existing id
       self.gistService.updateGist(
-        new Gist(this.gist._id, this.gist.title, this.gist.description, this.gist.technologies, this.gist.link)).subscribe(updatedGist => {
+        new Gist(this.gist._id, this.gist.title, this.gist.description,
+                 this.gist.technologies, this.gist.link, this.gist.user)).subscribe(updatedGist => {
           if (updatedGist) {
               self.appSocketIoService.emitEventOnGistUpdated(updatedGist); // Emit event to notify other clients
           } else {
@@ -49,7 +51,8 @@ export class GistEditComponent {
       this.gist.technologies = this.gist.techs.split(',');
       // Save a new one when there is no id filled
       self.gistService.postGist(
-        new Gist(null, this.gist.title, this.gist.description, this.gist.technologies, this.gist.link)).subscribe(savedGist => {
+        new Gist(null, this.gist.title, this.gist.description,
+                 this.gist.technologies, this.gist.link, this.gist.user)).subscribe(savedGist => {
           if (savedGist) {
               self.appSocketIoService.emitEventOnGistSaved(savedGist); // Emit event to notify other clients
               self.dialogRef.close(savedGist)

@@ -1,9 +1,11 @@
 import { Gist } from './gist.model';
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class GistService {
+  gistListener: EventEmitter<any> = new EventEmitter<any>();
+
   constructor(private http: HttpClient) {
   }
 
@@ -30,5 +32,9 @@ export class GistService {
   // delete a gist
   deleteGist(gistId) {
     return this.http.delete('http://localhost:3000/api/gist/' + gistId);
+  }
+
+  emitGistListUpdated(gist: Gist) {
+    this.gistListener.emit();
   }
 }

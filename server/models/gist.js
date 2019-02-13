@@ -19,6 +19,10 @@ var gistSchema = new Schema({
     type: String,
     required: true
   },
+  user: {
+    type: String,
+    reuired: true
+  },
   created_at: Date,
   updated_at: Date
 });

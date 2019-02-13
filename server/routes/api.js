@@ -38,7 +38,8 @@ router.put('/gist', (req, res) => {
     title: data.title,
     description: data.description,
     technologies: data.technologies,
-    link: data.link
+    link: data.link,
+    user: data.user
   };
 
   // find the gist with id :id
@@ -58,7 +59,8 @@ router.post('/gist', (req, res) => {
     title: data.title,
     description: data.description,
     technologies: data.technologies,
-    link: data.link
+    link: data.link,
+    user: data.user
   });
 
   // save the gist

@@ -3,7 +3,7 @@
  */
 export class Gist{
     constructor(public _id, public title, public description, 
-                public technologies, public link){
+                public technologies, public link, public user){
     }
     
 }

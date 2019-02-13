@@ -16,6 +16,12 @@ export class GistListComponent implements OnInit {
   public gists: any = [];
 
   constructor(private gistService: GistService, private dialog: MatDialog) {
+    this.gistService.gistListener.subscribe(res => {
+      this.gistService.getAllGists()
+        .subscribe(gists => {
+            this.gists = gists;
+      });
+    });
   }
 
   ngOnInit() {
@@ -43,10 +49,6 @@ export class GistListComponent implements OnInit {
     const dialogRef = this.dialog.open(GistEditComponent, config);
     // After close the gist we take the register gist to add it to the list
     dialogRef.afterClosed().subscribe(result => {
-      // Populate our list
-      if (result) {
-          self.gists.push(result);
-      }
     });
   }
 
