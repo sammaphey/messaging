@@ -9,7 +9,7 @@ export class AppSocketIoService {
 
   // Constructor with an injection of ToastService
   constructor(private toasterService: ToasterService) {
-    this.socket = io();
+    this.socket = io('http://localhost:3000');
   }
 
   // Emit: gist saved event

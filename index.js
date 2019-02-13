@@ -1,17 +1,15 @@
 // Get dependencies
 const express = require('express');
 const path = require('path');
-const http = require('http');
 const bodyParser = require('body-parser');
+var cors = require('cors');
 // Get gist route
 const api = require('./server/routes/api');
 const app = express();
+app.use(cors());
 /**
  * Create HTTP server.
  */
-const server = http.createServer(app);
-// Socket.io for real time communication
-var io = require('socket.io').listen(server);
 
 // Parsers for POST data
 app.use(bodyParser.json());
@@ -38,7 +36,9 @@ app.set('port', port);
 /**
  * Listen on provided port, on all network interfaces.
  */
-server.listen(port, () => console.log(`API running on localhost:${port}`));
+var appServer = app.listen(port, () => console.log(`API running on localhost:${port}`));
+// Socket.io for real time communication
+var io = require('socket.io').listen(appServer);
 
 /**
  * Socket events
